@@ -4,4 +4,5 @@ export type UpdateExamTypeInput = {
 	durationMinutes: number;
 	description?: string;
 	instructions?: string;
+	actorId: string;
 };

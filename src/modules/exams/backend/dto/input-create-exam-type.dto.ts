@@ -3,4 +3,5 @@ export type CreateExamTypeInput = {
     durationMinutes: number;
     description?: string;
     instructions?: string;
+    actorId: string;
 };

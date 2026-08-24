@@ -5,6 +5,8 @@ import { requireAuth } from "./modules/identity/backend/middleware/require-auth"
 import { adminTestRoute } from "./modules/identity/backend/routes/admin-test.route";
 import { createDb } from "./shared/database/db";
 import type { Variables } from "./types/variables";
+import { examTypeRoutes } from "./modules/exams/backend/route/exam-type.route";
+import { handleHttpError } from "./shared/domain/errors/handle-http-error";
 
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
 
@@ -23,14 +25,7 @@ app.use("*", async (c, next) => {
 });
 
 app.onError((err, c) => {
-	console.error(`[Error Centralizado]: ${err.message}`);
-	return c.json(
-		{
-			success: false,
-			message: "Ha ocurrido un error interno en el servidor del Edge.",
-		},
-		500,
-	);
+	return handleHttpError(err, c);
 });
 
 app.all("/api/v1/auth/*", async (c) => {
@@ -52,5 +47,7 @@ app.get("/api/v1/protected/me", requireAuth, (c) => {
 });
 
 app.route("/api/v1/admin", adminTestRoute);
+
+app.route("/api/v1/exam-types", examTypeRoutes);
 
 export default app;
