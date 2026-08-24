@@ -12,4 +12,8 @@ export class ExamTypeName {
 
 		return new ExamTypeName(normalized);
 	}
+
+	get normalizedValue() {
+		return this.value.toLocaleLowerCase();
+	}
 }
