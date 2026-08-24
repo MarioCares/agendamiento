@@ -4,3 +4,7 @@ allowBuilds:
   better-sqlite3: true
   esbuild: true
   workerd: true
+
+# Permit immediate installation of published versions. This avoids release-age
+# resolution failures in local development and CI.
+minimumReleaseAge: 0
