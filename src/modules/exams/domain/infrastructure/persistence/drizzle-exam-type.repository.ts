@@ -1,12 +1,11 @@
 import { eq, sql } from "drizzle-orm";
 import type { ExamTypeRepository } from "@/modules/exams/domain/repositories/exam-type.repository";
-import { Database } from "@/shared/database/db";
-import { ExamTypeId } from "../../domain/value-objects/exam-type-id.vo";
-import { ExamType } from "../../domain/entities/exam-type.entity";
-import { examTypes } from "../../domain/infrastructure/persistence/exam-types.schema";
-import { toDomainExamType, toPersistenceExamType } from "../../domain/infrastructure/persistence/exam-types.mapper";
-import { ExamTypeName } from "../../domain/value-objects/exam-name.entity";
-
+import type { Database } from "@/shared/database/db";
+import type { ExamType } from "../../entities/exam-type.entity";
+import type { ExamTypeName } from "../../value-objects/exam-name.entity";
+import type { ExamTypeId } from "../../value-objects/exam-type-id.vo";
+import { toDomainExamType, toPersistenceExamType } from "./exam-types.mapper";
+import { examTypes } from "./exam-types.schema";
 
 export class DrizzleExamTypeRepository implements ExamTypeRepository {
 	constructor(private readonly db: Database) {}
@@ -25,19 +24,14 @@ export class DrizzleExamTypeRepository implements ExamTypeRepository {
 		const [row] = await this.db
 			.select()
 			.from(examTypes)
-			.where(
-				sql`lower(${examTypes.name}) = lower(${name.value})`,
-			)
+			.where(sql`lower(${examTypes.name}) = lower(${name.value})`)
 			.limit(1);
 
 		return row ? toDomainExamType(row) : null;
 	}
 
 	async list(): Promise<ExamType[]> {
-		const rows = await this.db
-			.select()
-			.from(examTypes)
-			.orderBy(examTypes.name);
+		const rows = await this.db.select().from(examTypes).orderBy(examTypes.name);
 
 		return rows.map(toDomainExamType);
 	}

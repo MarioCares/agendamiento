@@ -1,8 +1,8 @@
-import { requireAuth } from "@/modules/identity/backend/middleware/require-auth";
-import { requireRole } from "@/modules/identity/backend/middleware/require-role";
-import { AppEnv } from "@/types/app-env";
 import { Hono } from "hono";
 import { z } from "zod";
+import { requireAuth } from "@/modules/identity/backend/middleware/require-auth";
+import { requireRole } from "@/modules/identity/backend/middleware/require-role";
+import type { AppEnv } from "@/types/app-env";
 import { examTypeComposition } from "../composition/exam-types.composition";
 import { toDtoExamType } from "../dto/output-exam-type.dto";
 

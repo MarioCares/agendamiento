@@ -5,5 +5,5 @@ import * as auditSchema from "@/shared/audit/persistence/audit-log.schema";
 export const schema = {
 	...authSchema,
 	...examTypeSchema,
-	...auditSchema
+	...auditSchema,
 };

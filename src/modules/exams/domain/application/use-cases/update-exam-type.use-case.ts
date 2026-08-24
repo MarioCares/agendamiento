@@ -1,16 +1,16 @@
-import { AuditLogRepository } from "@/shared/audit/audit-log.repository";
-import { ExamType } from "../../entities/exam-type.entity";
+import type { AuditLogRepository } from "@/shared/audit/audit-log.repository";
+import type { UpdateExamTypeInput } from "../../../backend/dto/input-update-exam-type.dto";
+import type { ExamType } from "../../entities/exam-type.entity";
 import { ExamTypeAlreadyExistsError } from "../../errors/exam-type-already-exists.error";
 import { ExamTypeNotFoundError } from "../../errors/exam-type-not-found.error";
-import { ExamTypeRepository } from "../../repositories/exam-type.repository";
+import type { ExamTypeRepository } from "../../repositories/exam-type.repository";
 import { ExamTypeName } from "../../value-objects/exam-name.entity";
 import { ExamTypeId } from "../../value-objects/exam-type-id.vo";
-import { UpdateExamTypeInput } from "../../../backend/dto/input-update-exam-type.dto";
 
 export class UpdateExamTypeUseCase {
 	constructor(
 		private readonly examTypeRepository: ExamTypeRepository,
-		private readonly auditLogRepository: AuditLogRepository
+		private readonly auditLogRepository: AuditLogRepository,
 	) {}
 
 	async execute(input: UpdateExamTypeInput): Promise<ExamType> {
@@ -57,7 +57,7 @@ export class UpdateExamTypeUseCase {
 				active: examType.active,
 			},
 		});
-		
+
 		return examType;
 	}
 }

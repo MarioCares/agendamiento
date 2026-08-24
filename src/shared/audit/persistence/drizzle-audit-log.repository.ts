@@ -1,5 +1,8 @@
-import { Database } from "@/shared/database/db";
-import { AuditLogRepository, CreateAuditLogInput } from "../audit-log.repository";
+import type { Database } from "@/shared/database/db";
+import type {
+	AuditLogRepository,
+	CreateAuditLogInput,
+} from "../audit-log.repository";
 import { auditLogs } from "./audit-log.schema";
 
 export class DrizzleAuditLogRepository implements AuditLogRepository {

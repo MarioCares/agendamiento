@@ -1,6 +1,6 @@
-import { ExamType } from "../entities/exam-type.entity";
-import { ExamTypeName } from "../value-objects/exam-name.entity";
-import { ExamTypeId } from "../value-objects/exam-type-id.vo";
+import type { ExamType } from "../entities/exam-type.entity";
+import type { ExamTypeName } from "../value-objects/exam-name.entity";
+import type { ExamTypeId } from "../value-objects/exam-type-id.vo";
 
 export interface ExamTypeRepository {
 	findById(id: ExamTypeId): Promise<ExamType | null>;

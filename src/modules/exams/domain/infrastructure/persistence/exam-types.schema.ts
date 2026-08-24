@@ -1,5 +1,12 @@
 import { sql } from "drizzle-orm";
-import { boolean, integer, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
+import {
+	boolean,
+	integer,
+	pgTable,
+	text,
+	timestamp,
+	uniqueIndex,
+} from "drizzle-orm/pg-core";
 
 export const examTypes = pgTable(
 	"exam_types",
@@ -18,7 +25,6 @@ export const examTypes = pgTable(
 			.defaultNow(),
 	},
 	(table) => [
-		uniqueIndex("exam_types_name_unique")
-			.on(sql`lower(${table.name})`),
+		uniqueIndex("exam_types_name_unique").on(sql`lower(${table.name})`),
 	],
 );

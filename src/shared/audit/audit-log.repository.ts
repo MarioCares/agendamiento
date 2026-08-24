@@ -1,7 +1,4 @@
-export type AuditAction =
-	| "create"
-	| "update"
-	| "delete";
+export type AuditAction = "create" | "update" | "delete";
 
 export type CreateAuditLogInput = {
 	entityType: string;

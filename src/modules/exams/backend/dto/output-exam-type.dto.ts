@@ -1,4 +1,4 @@
-import { ExamType } from "../../domain/entities/exam-type.entity";
+import type { ExamType } from "../../domain/entities/exam-type.entity";
 
 export type ExamTypeDto = {
 	id: string;

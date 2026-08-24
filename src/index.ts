@@ -1,12 +1,12 @@
 import { Hono } from "hono";
 import { validateEnv } from "./config/env";
+import { examTypeRoutes } from "./modules/exams/backend/route/exam-type.route";
 import { createAuth } from "./modules/identity/backend/auth/auth";
 import { requireAuth } from "./modules/identity/backend/middleware/require-auth";
 import { adminTestRoute } from "./modules/identity/backend/routes/admin-test.route";
 import { createDb } from "./shared/database/db";
-import type { Variables } from "./types/variables";
-import { examTypeRoutes } from "./modules/exams/backend/route/exam-type.route";
 import { handleHttpError } from "./shared/domain/errors/handle-http-error";
+import type { Variables } from "./types/variables";
 
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
 

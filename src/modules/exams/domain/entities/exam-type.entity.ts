@@ -1,6 +1,6 @@
-import { ExamTypeId } from "../value-objects/exam-type-id.vo";
-import { ExamTypeName } from "../value-objects/exam-name.entity";
 import { InvalidExamTypeDurationError } from "../errors/invalid-exam-type-duration.error";
+import type { ExamTypeName } from "../value-objects/exam-name.entity";
+import type { ExamTypeId } from "../value-objects/exam-type-id.vo";
 
 export class ExamType {
 	private constructor(
@@ -10,7 +10,7 @@ export class ExamType {
 		private _description: string,
 		private _instructions: string,
 		private _active: boolean,
-	) { }
+	) {}
 
 	static create(params: {
 		id: ExamTypeId;
@@ -20,7 +20,10 @@ export class ExamType {
 		instructions?: string;
 		active?: boolean;
 	}) {
-		if (!Number.isInteger(params.durationMinutes) || params.durationMinutes <= 0) {
+		if (
+			!Number.isInteger(params.durationMinutes) ||
+			params.durationMinutes <= 0
+		) {
 			throw new InvalidExamTypeDurationError();
 		}
 

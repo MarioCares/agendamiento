@@ -1,15 +1,18 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { InMemoryExamTypeRepository } from "../../repositories/in-memory-exam-type.repository";
 import { CreateExamTypeUseCase } from "@/modules/exams/domain/application/use-cases/create-exam-type.use-case";
 import { ExamTypeAlreadyExistsError } from "@/modules/exams/domain/errors/exam-type-already-exists.error";
+import { InMemoryAuditLogRepository } from "@/tests/shared/audit/in-memory-audit-log.repository";
+import { InMemoryExamTypeRepository } from "../../repositories/in-memory-exam-type.repository";
 
 describe("CreateExamTypeUseCase", () => {
 	let repository: InMemoryExamTypeRepository;
+	let auditLogRepository: InMemoryAuditLogRepository;
 	let useCase: CreateExamTypeUseCase;
 
 	beforeEach(() => {
 		repository = new InMemoryExamTypeRepository();
-		useCase = new CreateExamTypeUseCase(repository);
+		auditLogRepository = new InMemoryAuditLogRepository();
+		useCase = new CreateExamTypeUseCase(repository, auditLogRepository);
 	});
 
 	it("should create an exam type", async () => {
@@ -17,6 +20,7 @@ describe("CreateExamTypeUseCase", () => {
 			name: "Campo visual",
 			durationMinutes: 30,
 			description: "Evaluación del campo visual",
+			actorId: "user",
 		});
 
 		expect(repository.items).toHaveLength(1);
@@ -29,12 +33,14 @@ describe("CreateExamTypeUseCase", () => {
 		await useCase.execute({
 			name: "Campo visual",
 			durationMinutes: 30,
+			actorId: "user",
 		});
 
 		await expect(
 			useCase.execute({
 				name: "Campo visual",
 				durationMinutes: 45,
+				actorId: "user",
 			}),
 		).rejects.toBeInstanceOf(ExamTypeAlreadyExistsError);
 

@@ -1,7 +1,7 @@
 import type { Context } from "hono";
-import { DomainError } from "@/shared/domain/errors/domain-error";
-import { ExamTypeNotFoundError } from "@/modules/exams/domain/errors/exam-type-not-found.error";
 import { ExamTypeAlreadyExistsError } from "@/modules/exams/domain/errors/exam-type-already-exists.error";
+import { ExamTypeNotFoundError } from "@/modules/exams/domain/errors/exam-type-not-found.error";
+import { DomainError } from "@/shared/domain/errors/domain-error";
 
 export function handleHttpError(error: unknown, c: Context) {
 	if (error instanceof ExamTypeNotFoundError) {

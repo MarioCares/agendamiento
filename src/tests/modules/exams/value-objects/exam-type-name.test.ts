@@ -1,6 +1,6 @@
+import { describe, expect, it } from "vitest";
 import { InvalidExamTypeNameError } from "@/modules/exams/domain/errors/invalid-exam-type-name.error";
 import { ExamTypeName } from "@/modules/exams/domain/value-objects/exam-name.entity";
-import { describe, expect, it } from "vitest";
 
 describe("ExamTypeName", () => {
 	it("should create a valid exam type name", () => {
@@ -16,14 +16,10 @@ describe("ExamTypeName", () => {
 	});
 
 	it("should throw when name has less than 2 characters", () => {
-		expect(() => ExamTypeName.create("A")).toThrow(
-			InvalidExamTypeNameError,
-		);
+		expect(() => ExamTypeName.create("A")).toThrow(InvalidExamTypeNameError);
 	});
 
 	it("should throw when name is empty", () => {
-		expect(() => ExamTypeName.create("   ")).toThrow(
-			InvalidExamTypeNameError,
-		);
+		expect(() => ExamTypeName.create("   ")).toThrow(InvalidExamTypeNameError);
 	});
 });

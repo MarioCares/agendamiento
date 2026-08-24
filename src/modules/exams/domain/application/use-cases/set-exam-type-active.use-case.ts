@@ -1,14 +1,14 @@
-import { AuditLogRepository } from "@/shared/audit/audit-log.repository";
-import { ExamType } from "../../entities/exam-type.entity";
+import type { AuditLogRepository } from "@/shared/audit/audit-log.repository";
+import type { SetExamTypeActiveInput } from "../../../backend/dto/input-set-exam-type-active.dto";
+import type { ExamType } from "../../entities/exam-type.entity";
 import { ExamTypeNotFoundError } from "../../errors/exam-type-not-found.error";
-import { ExamTypeRepository } from "../../repositories/exam-type.repository";
+import type { ExamTypeRepository } from "../../repositories/exam-type.repository";
 import { ExamTypeId } from "../../value-objects/exam-type-id.vo";
-import { SetExamTypeActiveInput } from "../../../backend/dto/input-set-exam-type-active.dto";
 
 export class SetExamTypeActiveUseCase {
 	constructor(
 		private readonly examTypeRepository: ExamTypeRepository,
-		private readonly auditLogRepository: AuditLogRepository
+		private readonly auditLogRepository: AuditLogRepository,
 	) {}
 
 	async execute(input: SetExamTypeActiveInput): Promise<ExamType> {

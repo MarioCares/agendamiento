@@ -1,10 +1,10 @@
-import { AuditLogRepository } from "@/shared/audit/audit-log.repository";
+import type { AuditLogRepository } from "@/shared/audit/audit-log.repository";
+import type { CreateExamTypeInput } from "../../../backend/dto/input-create-exam-type.dto";
 import { ExamType } from "../../entities/exam-type.entity";
 import { ExamTypeAlreadyExistsError } from "../../errors/exam-type-already-exists.error";
-import { ExamTypeRepository } from "../../repositories/exam-type.repository";
+import type { ExamTypeRepository } from "../../repositories/exam-type.repository";
 import { ExamTypeName } from "../../value-objects/exam-name.entity";
 import { ExamTypeId } from "../../value-objects/exam-type-id.vo";
-import { type CreateExamTypeInput } from "../../../backend/dto/input-create-exam-type.dto";
 
 export class CreateExamTypeUseCase {
 	constructor(
@@ -15,7 +15,7 @@ export class CreateExamTypeUseCase {
 	async execute(input: CreateExamTypeInput): Promise<ExamType> {
 		const name = ExamTypeName.create(input.name);
 		const existing = await this.examTypeRepository.findByName(name);
-		
+
 		if (existing) {
 			throw new ExamTypeAlreadyExistsError();
 		}
