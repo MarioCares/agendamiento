@@ -526,149 +526,281 @@ Los estados finales deben validarse con la consulta.
 
 ---
 
-# 12. Backlog separado para Kanban
+# 12. Backlog priorizado y ordenado por dependencias
 
-La siguiente lista está pensada para convertir cada punto en una tarjeta o issue independiente.
+La siguiente lista está pensada para convertirse directamente en tarjetas o issues de Kanban.
 
-## Bloque A — Pacientes
+## Criterio de prioridad
 
-- Crear listado de pacientes.
-- Implementar búsqueda de pacientes.
-- Crear paciente.
-- Editar paciente.
-- Ver detalle de paciente.
-- Ver solicitudes de un paciente.
-- Ver reservas de un paciente.
+- **P0 — Crítico:** necesario para completar el flujo principal del MVP.
+- **P1 — Importante:** necesario para que la operación diaria sea práctica y administrable.
+- **P2 — Mejora:** aporta comodidad o una mejor experiencia, pero no bloquea la validación inicial del producto.
+
+La numeración de etapas indica el **orden recomendado de implementación según dependencias**.
 
 ---
 
-## Bloque B — Exámenes
+## Etapa 1 — Acceso administrativo
 
-- Crear listado de tipos de examen.
-- Crear tipo de examen.
-- Editar tipo de examen.
-- Configurar duración de examen.
-- Configurar descripción.
-- Configurar indicaciones.
-- Activar o desactivar examen.
+Estas tareas no dependen de otros módulos y permiten construir el resto del sistema dentro de un entorno administrativo controlado.
 
----
-
-## Bloque C — Horarios y disponibilidad
-
-- Definir días normales de atención.
-- Definir hora de inicio de jornada.
-- Definir hora de término de jornada.
-- Definir pausas de atención.
-- Crear excepción de horario.
-- Crear día extraordinario de atención.
-- Bloquear un intervalo horario.
-- Bloquear un día completo.
-- Editar bloqueo.
-- Eliminar bloqueo.
+- **P0** Crear inicio de sesión.
+- **P0** Proteger el área administrativa.
+- **P1** Crear estructura principal del área administrativa.
+- **P2** Crear página principal o resumen administrativo.
 
 ---
 
-## Bloque D — Solicitudes Doc. Palma
+## Etapa 2 — Gestión de tipos de examen
 
-- Crear solicitud para paciente existente.
-- Crear paciente durante la creación de una solicitud.
-- Definir origen de solicitud.
-- Asociar exámenes a solicitud.
-- Editar exámenes de una solicitud.
-- Agregar observaciones.
-- Generar enlace único de agendamiento.
-- Generar texto para enviar al paciente.
-- Consultar estado de la solicitud.
+Los exámenes deben existir antes de poder asociarlos a solicitudes o calcular duraciones de reservas.
 
----
-
-## Bloque E — Solicitudes externas
-
-- Crear página pública de ingreso.
-- Crear formulario de datos personales.
-- Permitir adjuntar orden médica.
-- Registrar paciente externo.
-- Crear solicitud externa.
-- Marcar solicitud como pendiente de revisión.
-- Crear listado de solicitudes pendientes.
-- Revisar orden médica.
-- Asociar exámenes.
-- Aprobar solicitud para agendamiento.
-- Generar acceso de agendamiento.
+- **P0** Crear listado de tipos de examen.
+- **P0** Crear tipo de examen.
+- **P0** Editar tipo de examen.
+- **P0** Configurar duración de examen.
+- **P1** Configurar descripción.
+- **P1** Configurar indicaciones para el paciente.
+- **P1** Activar o desactivar examen.
 
 ---
 
-## Bloque F — Agendamiento del paciente
+## Etapa 3 — Gestión de pacientes
 
-- Mostrar datos de la solicitud.
-- Mostrar exámenes asociados.
-- Mostrar duración de cada examen.
-- Permitir seleccionar exámenes.
-- Calcular duración total.
-- Mostrar fechas disponibles.
-- Mostrar horarios disponibles.
-- Impedir selección de horario inválido.
-- Crear reserva.
-- Mostrar resumen antes de confirmar.
-- Mostrar confirmación después de reservar.
+Los pacientes deben existir antes de crear solicitudes o reservas administrativas.
+
+- **P0** Crear paciente.
+- **P0** Crear listado de pacientes.
+- **P0** Implementar búsqueda de pacientes.
+- **P0** Editar paciente.
+- **P1** Ver detalle de paciente.
+- **P1** Ver solicitudes de un paciente.
+- **P1** Ver reservas de un paciente.
 
 ---
 
-## Bloque G — Motor de disponibilidad
+## Etapa 4 — Configuración base de horarios
 
-- Calcular disponibilidad según horario normal.
-- Excluir horarios bloqueados.
-- Excluir reservas existentes.
-- Calcular duración requerida.
-- Buscar bloques continuos disponibles.
-- Evitar superposición de reservas.
-- Considerar excepciones de calendario.
-- Considerar pausas de atención.
+La agenda necesita reglas de disponibilidad antes de poder ofrecer horas a los pacientes.
 
----
-
-## Bloque H — Agenda administrativa
-
-- Crear vista de agenda diaria.
-- Crear vista de agenda semanal.
-- Mostrar reservas en calendario.
-- Ver detalle de reserva.
-- Crear reserva manual.
-- Reagendar reserva.
-- Modificar hora de inicio.
-- Modificar duración.
-- Cancelar reserva.
-- Cambiar estado de reserva.
-- Acceder al paciente desde la reserva.
-- Acceder a la solicitud desde la reserva.
-- Visualizar orden médica desde la reserva.
+- **P0** Definir días normales de atención.
+- **P0** Definir hora de inicio de jornada.
+- **P0** Definir hora de término de jornada.
+- **P0** Definir pausas de atención.
+- **P1** Crear excepción de horario.
+- **P1** Crear día extraordinario de atención.
 
 ---
 
-## Bloque I — Confirmaciones
+## Etapa 5 — Gestión de bloqueos
 
-- Listar próximas reservas.
-- Identificar reservas pendientes de confirmación.
-- Configurar anticipación de confirmación.
-- Registrar confirmación manual.
-- Registrar intento de contacto.
-- Mostrar estado de confirmación en agenda.
+Los bloqueos deben formar parte del cálculo de disponibilidad antes de habilitar el agendamiento público.
 
----
-
-## Bloque J — Administración general
-
-- Inicio de sesión.
-- Área administrativa protegida.
-- Página principal/resumen.
-- Mostrar reservas del día.
-- Mostrar próximas reservas.
-- Mostrar solicitudes pendientes.
-- Mostrar confirmaciones pendientes.
+- **P0** Bloquear un intervalo horario.
+- **P0** Bloquear un día completo.
+- **P1** Agregar motivo de bloqueo.
+- **P1** Editar bloqueo.
+- **P1** Eliminar bloqueo.
 
 ---
 
+## Etapa 6 — Solicitudes provenientes de Doc. Palma
+
+Este será el primer flujo de negocio completo que se recomienda implementar porque parte desde información controlada por la consulta.
+
+### Creación de solicitud
+
+- **P0** Crear solicitud para paciente existente.
+- **P0** Crear paciente durante la creación de una solicitud.
+- **P0** Definir origen de solicitud.
+- **P0** Asociar exámenes a solicitud.
+- **P0** Editar exámenes de una solicitud.
+- **P1** Agregar observaciones.
+- **P1** Consultar estado de la solicitud.
+
+### Preparación del acceso del paciente
+
+- **P0** Generar enlace único de agendamiento.
+- **P1** Generar texto preparado para enviar al paciente.
+
+---
+
+## Etapa 7 — Motor de disponibilidad
+
+Esta etapa es una dependencia directa del agendamiento público.
+
+Debe completarse antes de permitir que un paciente confirme una reserva.
+
+- **P0** Calcular disponibilidad según horario normal.
+- **P0** Calcular duración total según exámenes seleccionados.
+- **P0** Excluir reservas existentes.
+- **P0** Excluir horarios bloqueados.
+- **P0** Buscar bloques continuos suficientemente largos.
+- **P0** Evitar superposición de reservas.
+- **P0** Considerar pausas de atención.
+- **P1** Considerar excepciones de calendario.
+- **P1** Considerar días extraordinarios de atención.
+
+---
+
+## Etapa 8 — Agendamiento de pacientes derivados
+
+Una vez que existen solicitudes y el motor de disponibilidad funciona, puede habilitarse el primer flujo real de autoagendamiento.
+
+- **P0** Validar acceso mediante enlace de agendamiento.
+- **P0** Mostrar información básica de la solicitud.
+- **P0** Mostrar exámenes asociados.
+- **P0** Mostrar duración aproximada de cada examen.
+- **P0** Permitir seleccionar exámenes.
+- **P0** Calcular duración total.
+- **P0** Mostrar fechas disponibles.
+- **P0** Mostrar horarios disponibles.
+- **P0** Impedir selección de horario inválido.
+- **P0** Crear reserva.
+- **P1** Mostrar resumen antes de confirmar.
+- **P0** Mostrar confirmación después de reservar.
+
+Al terminar esta etapa debería ser posible completar de principio a fin el flujo de un paciente proveniente de Doc. Palma.
+
+---
+
+## Etapa 9 — Agenda administrativa básica
+
+Después de permitir reservas reales, la consulta necesita herramientas para gestionarlas.
+
+- **P0** Crear vista de agenda diaria.
+- **P0** Mostrar reservas en la agenda.
+- **P0** Ver detalle de reserva.
+- **P0** Reagendar reserva.
+- **P0** Cancelar reserva.
+- **P0** Modificar hora de inicio.
+- **P1** Modificar duración.
+- **P0** Cambiar estado de reserva.
+- **P1** Crear reserva manual.
+- **P1** Acceder al paciente desde la reserva.
+- **P1** Acceder a la solicitud desde la reserva.
+- **P1** Visualizar orden médica desde la reserva.
+
+---
+
+## Etapa 10 — Flujo de pacientes externos
+
+Este flujo reutiliza pacientes, exámenes, solicitudes, disponibilidad, agendamiento y agenda administrativa.
+
+Por esa razón debe implementarse después de que el flujo Doc. Palma esté funcionando.
+
+### Ingreso público
+
+- **P0** Crear página pública de ingreso.
+- **P0** Crear formulario de datos personales.
+- **P0** Permitir adjuntar orden médica.
+- **P0** Registrar paciente externo.
+- **P0** Crear solicitud externa.
+
+### Revisión administrativa
+
+- **P0** Marcar solicitud como pendiente de revisión.
+- **P0** Crear listado de solicitudes pendientes.
+- **P0** Revisar orden médica.
+- **P0** Asociar exámenes correctos.
+- **P0** Aprobar solicitud para agendamiento.
+- **P0** Generar acceso de agendamiento.
+
+### Reutilización del flujo existente
+
+Una vez aprobada la solicitud, el paciente externo debe utilizar el mismo proceso de agendamiento construido en la Etapa 8.
+
+---
+
+## Etapa 11 — Confirmaciones
+
+Las confirmaciones dependen de que ya existan reservas reales.
+
+- **P1** Listar próximas reservas.
+- **P1** Identificar reservas pendientes de confirmación.
+- **P1** Configurar anticipación de confirmación.
+- **P1** Registrar confirmación manual.
+- **P1** Registrar intento de contacto.
+- **P1** Mostrar estado de confirmación en agenda.
+
+---
+
+## Etapa 12 — Mejoras de operación y experiencia
+
+Estas tareas mejoran la experiencia de administración, pero no son necesarias para validar el flujo principal.
+
+- **P2** Crear vista semanal de agenda.
+- **P2** Mostrar reservas del día en el resumen administrativo.
+- **P2** Mostrar próximas reservas en el resumen administrativo.
+- **P2** Mostrar solicitudes pendientes en el resumen administrativo.
+- **P2** Mostrar confirmaciones pendientes en el resumen administrativo.
+- **P2** Mejorar visualización del historial del paciente.
+- **P2** Mejorar manejo de excepciones de disponibilidad.
+
+---
+
+## Orden resumido de implementación
+
+1. Acceso administrativo.
+2. Tipos de examen.
+3. Pacientes.
+4. Horarios.
+5. Bloqueos.
+6. Solicitudes Doc. Palma.
+7. Motor de disponibilidad.
+8. Agendamiento de pacientes derivados.
+9. Agenda administrativa.
+10. Pacientes externos.
+11. Confirmaciones.
+12. Mejoras de operación.
+
+---
+
+## Primer hito funcional recomendado
+
+El primer gran hito debería ser completar las etapas 1 a 9.
+
+Al finalizar ese punto debe ser posible:
+
+1. registrar exámenes;
+2. registrar pacientes;
+3. configurar horarios;
+4. crear una solicitud proveniente de Doc. Palma;
+5. generar un enlace;
+6. permitir que el paciente seleccione sus exámenes;
+7. calcular horarios disponibles;
+8. reservar una hora;
+9. visualizar la reserva en la agenda;
+10. reagendarla o cancelarla administrativamente.
+
+Ese hito valida prácticamente todo el núcleo del sistema antes de agregar el flujo más complejo de pacientes externos.
+
+---
+
+## Segundo hito funcional recomendado
+
+Agregar el flujo de pacientes externos.
+
+Debe ser posible:
+
+1. recibir los datos del paciente;
+2. recibir una copia de su orden;
+3. revisar la solicitud;
+4. asociar los exámenes correspondientes;
+5. habilitar el agendamiento;
+6. reutilizar el mismo motor de disponibilidad y reserva.
+
+---
+
+## Tercer hito funcional recomendado
+
+Agregar herramientas de seguimiento operativo:
+
+1. confirmaciones;
+2. próximos pacientes;
+3. solicitudes pendientes;
+4. mejoras del calendario administrativo;
+5. mejoras generales de experiencia.
 # 13. Fuera del MVP inicial
 
 Las siguientes funcionalidades pueden considerarse posteriormente, pero no son necesarias para validar la primera versión:
