@@ -3,7 +3,7 @@ import type { CreateExamTypeInput } from "../../../backend/dto/input-create-exam
 import { ExamType } from "../../entities/exam-type.entity";
 import { ExamTypeAlreadyExistsError } from "../../errors/exam-type-already-exists.error";
 import type { ExamTypeRepository } from "../../repositories/exam-type.repository";
-import { ExamTypeName } from "../../value-objects/exam-name.entity";
+import { ExamTypeName } from "../../value-objects/exam-name.vo";
 import { ExamTypeId } from "../../value-objects/exam-type-id.vo";
 
 export class CreateExamTypeUseCase {

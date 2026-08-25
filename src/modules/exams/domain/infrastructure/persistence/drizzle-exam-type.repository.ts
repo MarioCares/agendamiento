@@ -2,7 +2,7 @@ import { eq, sql } from "drizzle-orm";
 import type { ExamTypeRepository } from "@/modules/exams/domain/repositories/exam-type.repository";
 import type { Database } from "@/shared/database/db";
 import type { ExamType } from "../../entities/exam-type.entity";
-import type { ExamTypeName } from "../../value-objects/exam-name.entity";
+import type { ExamTypeName } from "../../value-objects/exam-name.vo";
 import type { ExamTypeId } from "../../value-objects/exam-type-id.vo";
 import { toDomainExamType, toPersistenceExamType } from "./exam-types.mapper";
 import { examTypes } from "./exam-types.schema";

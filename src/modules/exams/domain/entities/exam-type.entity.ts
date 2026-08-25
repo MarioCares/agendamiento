@@ -1,5 +1,5 @@
 import { InvalidExamTypeDurationError } from "../errors/invalid-exam-type-duration.error";
-import type { ExamTypeName } from "../value-objects/exam-name.entity";
+import type { ExamTypeName } from "../value-objects/exam-name.vo";
 import type { ExamTypeId } from "../value-objects/exam-type-id.vo";
 
 export class ExamType {

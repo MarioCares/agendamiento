@@ -1,5 +1,5 @@
 import type { ExamType } from "../entities/exam-type.entity";
-import type { ExamTypeName } from "../value-objects/exam-name.entity";
+import type { ExamTypeName } from "../value-objects/exam-name.vo";
 import type { ExamTypeId } from "../value-objects/exam-type-id.vo";
 
 export interface ExamTypeRepository {

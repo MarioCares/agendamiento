@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { InvalidExamTypeNameError } from "@/modules/exams/domain/errors/invalid-exam-type-name.error";
-import { ExamTypeName } from "@/modules/exams/domain/value-objects/exam-name.entity";
+import { ExamTypeName } from "@/modules/exams/domain/value-objects/exam-name.vo";
 
 describe("ExamTypeName", () => {
 	it("should create a valid exam type name", () => {

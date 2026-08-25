@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { ExamType } from "@/modules/exams/domain/entities/exam-type.entity";
 import { InvalidExamTypeDurationError } from "@/modules/exams/domain/errors/invalid-exam-type-duration.error";
-import { ExamTypeName } from "@/modules/exams/domain/value-objects/exam-name.entity";
+import { ExamTypeName } from "@/modules/exams/domain/value-objects/exam-name.vo";
 import { ExamTypeId } from "@/modules/exams/domain/value-objects/exam-type-id.vo";
 
 function makeExamType() {
