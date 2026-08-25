@@ -22,6 +22,27 @@
 			"when": 1782757266443,
 			"tag": "0002_elite_vector",
 			"breakpoints": true
+		},
+		{
+			"idx": 3,
+			"version": "7",
+			"when": 1787622141225,
+			"tag": "0003_faithful_shocker",
+			"breakpoints": true
+		},
+		{
+			"idx": 4,
+			"version": "7",
+			"when": 1787622591856,
+			"tag": "0004_light_tombstone",
+			"breakpoints": true
+		},
+		{
+			"idx": 5,
+			"version": "7",
+			"when": 1787622700726,
+			"tag": "0005_large_garia",
+			"breakpoints": true
 		}
 	]
 }
