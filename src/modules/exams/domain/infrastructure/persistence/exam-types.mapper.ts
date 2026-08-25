@@ -1,6 +1,6 @@
 import type { examTypes } from "@/modules/exams/domain/infrastructure/persistence/exam-types.schema";
 import { ExamType } from "../../entities/exam-type.entity";
-import { ExamTypeName } from "../../value-objects/exam-name.entity";
+import { ExamTypeName } from "../../value-objects/exam-name.vo";
 import { ExamTypeId } from "../../value-objects/exam-type-id.vo";
 
 export function toDomainExamType(row: typeof examTypes.$inferSelect): ExamType {

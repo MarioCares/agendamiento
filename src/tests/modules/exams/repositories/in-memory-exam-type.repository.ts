@@ -1,6 +1,6 @@
 import type { ExamType } from "@/modules/exams/domain/entities/exam-type.entity";
 import type { ExamTypeRepository } from "@/modules/exams/domain/repositories/exam-type.repository";
-import type { ExamTypeName } from "@/modules/exams/domain/value-objects/exam-name.entity";
+import type { ExamTypeName } from "@/modules/exams/domain/value-objects/exam-name.vo";
 import type { ExamTypeId } from "@/modules/exams/domain/value-objects/exam-type-id.vo";
 
 export class InMemoryExamTypeRepository implements ExamTypeRepository {

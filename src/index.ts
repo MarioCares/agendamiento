@@ -4,6 +4,7 @@ import { examTypeRoutes } from "./modules/exams/backend/route/exam-type.route";
 import { createAuth } from "./modules/identity/backend/auth/auth";
 import { requireAuth } from "./modules/identity/backend/middleware/require-auth";
 import { adminTestRoute } from "./modules/identity/backend/routes/admin-test.route";
+import { patientRoutes } from "./modules/patients/backend/routes/patient.routes";
 import { createDb } from "./shared/database/db";
 import { handleHttpError } from "./shared/domain/errors/handle-http-error";
 import type { Variables } from "./types/variables";
@@ -47,7 +48,7 @@ app.get("/api/v1/protected/me", requireAuth, (c) => {
 });
 
 app.route("/api/v1/admin", adminTestRoute);
-
 app.route("/api/v1/exam-types", examTypeRoutes);
+app.route("/api/v1/patients", patientRoutes);
 
 export default app;

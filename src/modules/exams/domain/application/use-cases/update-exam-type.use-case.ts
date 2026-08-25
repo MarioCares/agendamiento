@@ -4,7 +4,7 @@ import type { ExamType } from "../../entities/exam-type.entity";
 import { ExamTypeAlreadyExistsError } from "../../errors/exam-type-already-exists.error";
 import { ExamTypeNotFoundError } from "../../errors/exam-type-not-found.error";
 import type { ExamTypeRepository } from "../../repositories/exam-type.repository";
-import { ExamTypeName } from "../../value-objects/exam-name.entity";
+import { ExamTypeName } from "../../value-objects/exam-name.vo";
 import { ExamTypeId } from "../../value-objects/exam-type-id.vo";
 
 export class UpdateExamTypeUseCase {
