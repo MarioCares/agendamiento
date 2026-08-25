@@ -12,7 +12,7 @@ export function ExamTypesToolbar({ onImport }: ExamTypesToolbarProps) {
 					Administra los exámenes disponibles en la consulta.
 				</p>
 			</div>
-			<Button onClick={onImport}>Importar</Button>
+			<Button onClick={onImport}>Agregar</Button>
 		</header>
 	);
 }
