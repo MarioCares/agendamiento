@@ -51,4 +51,8 @@ export class InMemoryPatientRepository implements PatientRepository {
 			this.items[index] = patient;
 		}
 	}
+
+	async countActive(): Promise<number> {
+		return this.items.filter((patient) => patient.active).length;
+	}
 }

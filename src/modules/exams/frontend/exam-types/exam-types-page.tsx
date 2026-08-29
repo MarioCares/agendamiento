@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { FormDialog } from "@/shared/ui/dialogs/form-dialog";
+import { StatusConfirmationDialog } from "@/shared/ui/dialogs/status-confirmation";
+import { EntityPageToolbar } from "@/shared/ui/toolbars/entity-toolbar";
 import type { ExamTypeDto } from "../../backend/dto/output-exam-type.dto";
 import { ExamTypesTable } from "./components/exam-types.table";
-import { CreateExamTypeDialog } from "./components/exam-types-create.dialog";
-import { ExamTypeStatusDialog } from "./components/exam-types-status.dialog";
-import { ExamTypesToolbar } from "./components/exam-types-toolbar";
-import { EditExamTypeDialog } from "./components/exam-types-update.dialog";
+import { ExamTypeForm } from "./forms/exam-type.form";
 import type { ExamTypeFormValues } from "./forms/exam-type.schema";
 import { useCreateExamType } from "./hooks/useCreateExamType";
 import { useExamTypes } from "./hooks/useExamTypes";
@@ -66,33 +66,62 @@ export function ExamTypesPage() {
 
 	return (
 		<main className="space-y-6 p-6">
-			<ExamTypesToolbar onImport={() => setCreateOpen(true)} />
+			<EntityPageToolbar
+				title="Tipos de examen"
+				description="Administra los exámenes disponibles en la consulta."
+				actionLabel="Agregar tipo de examen"
+				onAction={() => setCreateOpen(true)}
+			/>
 			<ExamTypesTable
 				examTypes={examTypesQuery.data ?? []}
 				onEdit={setSelectedExamType}
 				onRequestStatusChange={setStatusExamType}
 			/>
-			<CreateExamTypeDialog
-				onOpenChange={setCreateOpen}
+			<FormDialog
 				open={createOpen}
-				onSubmit={handleCreate}
-				errorMessage={createMutation.error?.message}
-			/>
-			<EditExamTypeDialog
+				title="Nuevo tipo de examen"
+				description="Ingresa los datos del examen."
+				onOpenChange={setCreateOpen}
+			>
+				<ExamTypeForm
+					errorMessage={createMutation.error?.message}
+					onSubmit={handleCreate}
+					onCancel={() => setCreateOpen(false)}
+				/>
+			</FormDialog>
+			<FormDialog
 				open={selectedExamType !== null}
-				examType={selectedExamType}
+				title="Editar tipo de examen"
+				description="Modifica los datos del examen seleccionado."
 				onOpenChange={(open) => {
 					if (!open) {
 						setSelectedExamType(null);
 					}
 				}}
-				errorMessage={updateMutation.error?.message}
-				onSubmit={handleUpdate}
-			/>
-			<ExamTypeStatusDialog
+			>
+				{selectedExamType ? (
+					<ExamTypeForm
+						key={selectedExamType.id}
+						errorMessage={updateMutation.error?.message}
+						defaultValues={{
+							name: selectedExamType.name,
+							durationMinutes: selectedExamType.durationMinutes,
+							description: selectedExamType.description,
+							instructions: selectedExamType.instructions,
+						}}
+						onSubmit={handleUpdate}
+						onCancel={() => setSelectedExamType(null)}
+					/>
+				) : null}
+			</FormDialog>
+			<StatusConfirmationDialog
 				open={statusExamType !== null}
-				examType={statusExamType}
+				item={statusExamType}
 				isPending={statusMutation.isPending}
+				entityName="tipo de examen"
+				getItemLabel={(examType) => examType.name}
+				activateDescription="Volverá a estar disponible para nuevas solicitudes."
+				deactivateDescription="Dejará de estar disponible para nuevas solicitudes."
 				onOpenChange={(open) => {
 					if (!open) {
 						setStatusExamType(null);

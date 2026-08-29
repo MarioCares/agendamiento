@@ -9,4 +9,5 @@ export interface PatientRepository {
 	search(query: string): Promise<Patient[]>;
 	create(patient: Patient): Promise<void>;
 	update(patient: Patient): Promise<void>;
+	countActive(): Promise<number>;
 }

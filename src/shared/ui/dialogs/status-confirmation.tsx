@@ -8,28 +8,40 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import type { ExamTypeDto } from "@/modules/exams/backend/dto/output-exam-type.dto";
 
-type ExamTypeStatusDialogProps = {
-	examType: ExamTypeDto | null;
+type ActivatableItem = {
+	active: boolean;
+};
+
+type StatusConfirmationDialogProps<T extends ActivatableItem> = {
+	item: T | null;
 	open: boolean;
 	isPending?: boolean;
+	entityName: string;
+	getItemLabel(item: T): string;
+	activateDescription: string;
+	deactivateDescription: string;
 	onOpenChange(open: boolean): void;
 	onConfirm(): Promise<void> | void;
 };
 
-export function ExamTypeStatusDialog({
-	examType,
+export function StatusConfirmationDialog<T extends ActivatableItem>({
+	item,
 	open,
 	isPending,
+	entityName,
+	getItemLabel,
+	activateDescription,
+	deactivateDescription,
 	onOpenChange,
 	onConfirm,
-}: ExamTypeStatusDialogProps) {
-	if (!examType) {
+}: StatusConfirmationDialogProps<T>) {
+	if (!item) {
 		return null;
 	}
 
-	const willActivate = !examType.active;
+	const willActivate = !item.active;
+	const itemLabel = getItemLabel(item);
 
 	return (
 		<AlertDialog open={open} onOpenChange={onOpenChange}>
@@ -37,14 +49,14 @@ export function ExamTypeStatusDialog({
 				<AlertDialogHeader>
 					<AlertDialogTitle>
 						{willActivate
-							? "Activar tipo de examen"
-							: "Desactivar tipo de examen"}
+							? `Activar ${entityName}`
+							: `Desactivar ${entityName}`}
 					</AlertDialogTitle>
 
 					<AlertDialogDescription>
 						{willActivate
-							? `¿Deseas activar "${examType.name}"? Volverá a estar disponible para nuevas solicitudes.`
-							: `¿Deseas desactivar "${examType.name}"? Dejará de estar disponible para nuevas solicitudes.`}
+							? `¿Deseas activar "${itemLabel}"? ${activateDescription}`
+							: `¿Deseas desactivar "${itemLabel}"? ${deactivateDescription}`}
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 

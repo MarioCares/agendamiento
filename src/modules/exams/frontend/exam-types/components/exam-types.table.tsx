@@ -8,6 +8,8 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import type { ExamTypeDto } from "@/modules/exams/backend/dto/output-exam-type.dto";
+import { EmptyTableState } from "@/shared/ui/tables/empty-table-state";
+import { EntityRowActions } from "@/shared/ui/tables/entity-row-actions";
 
 type ExamTypesTableProps = {
 	examTypes: ExamTypeDto[];
@@ -20,6 +22,10 @@ export function ExamTypesTable({
 	onEdit,
 	onRequestStatusChange,
 }: ExamTypesTableProps) {
+	if (examTypes.length === 0) {
+		return <EmptyTableState message="No hay tipos de exámenes para mostrar." />;
+	}
+
 	return (
 		<Table>
 			<TableHeader>
@@ -37,24 +43,12 @@ export function ExamTypesTable({
 						<TableCell className="font-medium">{examType.name}</TableCell>
 						<TableCell>{examType.durationMinutes} min</TableCell>
 						<TableCell>{examType.active ? "Activo" : "Inactivo"}</TableCell>
-						<TableCell className="text-right">
-							<div className="flex justify-end gap-2">
-								<Button
-									variant="outline"
-									size="sm"
-									onClick={() => onEdit(examType)}
-								>
-									Editar
-								</Button>
-								<Button
-									variant={examType.active ? "destructive" : "default"}
-									size="sm"
-									onClick={() => onRequestStatusChange(examType)}
-								>
-									{examType.active ? "Desactivar" : "Activar"}
-								</Button>
-							</div>
-						</TableCell>
+						<EntityRowActions
+							item={examType}
+							isActive={examType.active}
+							onEdit={onEdit}
+							onRequestStatusChange={onRequestStatusChange}
+						/>
 					</TableRow>
 				))}
 			</TableBody>
