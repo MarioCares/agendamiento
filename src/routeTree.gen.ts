@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedAdminPacientesRouteImport } from './routes/_authenticated/admin/pacientes'
 import { Route as AuthenticatedAdminTiposExamenesRouteImport } from './routes/_authenticated/admin/tipos-examenes'
 
 const IndexRoute = IndexRouteImport.update({
@@ -34,6 +35,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedAdminPacientesRoute =
+  AuthenticatedAdminPacientesRouteImport.update({
+    id: '/admin/pacientes',
+    path: '/admin/pacientes',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedAdminTiposExamenesRoute =
   AuthenticatedAdminTiposExamenesRouteImport.update({
     id: '/admin/tipos-examenes',
@@ -45,12 +52,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/admin/pacientes': typeof AuthenticatedAdminPacientesRoute
   '/admin/tipos-examenes': typeof AuthenticatedAdminTiposExamenesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/admin/pacientes': typeof AuthenticatedAdminPacientesRoute
   '/admin/tipos-examenes': typeof AuthenticatedAdminTiposExamenesRoute
 }
 export interface FileRoutesById {
@@ -59,19 +68,23 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/admin/pacientes': typeof AuthenticatedAdminPacientesRoute
   '/_authenticated/admin/tipos-examenes': typeof AuthenticatedAdminTiposExamenesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/dashboard' | '/admin/tipos-examenes'
+  fullPaths:
+    '/' | '/login' | '/dashboard' | '/admin/pacientes' | '/admin/tipos-examenes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/dashboard' | '/admin/tipos-examenes'
+  to:
+    '/' | '/login' | '/dashboard' | '/admin/pacientes' | '/admin/tipos-examenes'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/login'
     | '/_authenticated/dashboard'
+    | '/_authenticated/admin/pacientes'
     | '/_authenticated/admin/tipos-examenes'
   fileRoutesById: FileRoutesById
 }
@@ -111,6 +124,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/admin/pacientes': {
+      id: '/_authenticated/admin/pacientes'
+      path: '/admin/pacientes'
+      fullPath: '/admin/pacientes'
+      preLoaderRoute: typeof AuthenticatedAdminPacientesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/admin/tipos-examenes': {
       id: '/_authenticated/admin/tipos-examenes'
       path: '/admin/tipos-examenes'
@@ -123,11 +143,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedAdminPacientesRoute: typeof AuthenticatedAdminPacientesRoute
   AuthenticatedAdminTiposExamenesRoute: typeof AuthenticatedAdminTiposExamenesRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedAdminPacientesRoute: AuthenticatedAdminPacientesRoute,
   AuthenticatedAdminTiposExamenesRoute: AuthenticatedAdminTiposExamenesRoute,
 }
 

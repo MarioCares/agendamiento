@@ -1,4 +1,4 @@
-import { eq, ilike, or } from "drizzle-orm";
+import { count, eq, ilike, or } from "drizzle-orm";
 import type { Database } from "@/shared/database/db";
 import type { Patient } from "../../entities/patient.entity";
 import type { PatientRepository } from "../../repositories/patient.repository";
@@ -85,5 +85,16 @@ export class DrizzlePatientRepository implements PatientRepository {
 				updatedAt: new Date(),
 			})
 			.where(eq(patients.id, patient.id.value));
+	}
+
+	async countActive(): Promise<number> {
+		const [result] = await this.db
+			.select({
+				count: count(),
+			})
+			.from(patients)
+			.where(eq(patients.active, true));
+
+		return result.count;
 	}
 }

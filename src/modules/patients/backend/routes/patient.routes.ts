@@ -54,6 +54,16 @@ patientRoutes.get("/search", async (c) => {
 	});
 });
 
+patientRoutes.get("/active-count", async (c) => {
+	const db = c.get("db");
+	const { countActivePatientsUseCase } = patientComposition(db);
+	const count = await countActivePatientsUseCase.execute();
+	return c.json({
+		success: true,
+		data: count,
+	});
+});
+
 patientRoutes.post("/", async (c) => {
 	const body = await c.req.json();
 	const parsed = createPatientSchema.safeParse(body);

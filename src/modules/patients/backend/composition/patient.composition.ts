@@ -1,5 +1,6 @@
 import { DrizzleAuditLogRepository } from "@/shared/audit/persistence/drizzle-audit-log.repository";
 import type { Database } from "@/shared/database/db";
+import { CountActivePatientsUseCase } from "../../domain/application/use-cases/count-active-patient.use-case";
 import { CreatePatientUseCase } from "../../domain/application/use-cases/create-patient.use-case";
 import { ListPatientsUseCase } from "../../domain/application/use-cases/list-patients.use-case";
 import { SearchPatientsUseCase } from "../../domain/application/use-cases/search-patients.use-case";
@@ -25,6 +26,9 @@ export function patientComposition(db: Database) {
 		updatePatientUseCase: new UpdatePatientUseCase(
 			patientRepository,
 			auditLogRepository,
+		),
+		countActivePatientsUseCase: new CountActivePatientsUseCase(
+			patientRepository,
 		),
 	};
 }
