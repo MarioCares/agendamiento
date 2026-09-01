@@ -1,4 +1,4 @@
-import { and, eq, gt, lt, ne, sql } from "drizzle-orm";
+import { and, eq, ne, sql } from "drizzle-orm";
 import type { Database } from "@/shared/database/db";
 import type { DayOfWeek } from "../../entities/dayof-week.vo";
 import type { ScheduleRule } from "../../entities/schedule-rule.entity";
