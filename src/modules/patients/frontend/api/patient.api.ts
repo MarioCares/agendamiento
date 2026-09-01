@@ -82,7 +82,7 @@ export async function setPatientActive(
 	id: string,
 	active: boolean,
 ): Promise<PatientDto> {
-	const response = await api.put<ApiSuccessResponse<PatientDto>>(
+	const response = await api.patch<ApiSuccessResponse<PatientDto>>(
 		`/patients/${id}/status`,
 		{ active },
 	);
