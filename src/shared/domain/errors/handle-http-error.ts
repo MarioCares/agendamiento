@@ -3,6 +3,8 @@ import { ExamTypeAlreadyExistsError } from "@/modules/exams/domain/errors/exam-t
 import { ExamTypeNotFoundError } from "@/modules/exams/domain/errors/exam-type-not-found.error";
 import { PatientAlreadyExistsError } from "@/modules/patients/domain/errors/patient-already-exists.error";
 import { PatientNotFoundError } from "@/modules/patients/domain/errors/patient-not-found.error";
+import { ScheduleRuleNotFoundError } from "@/modules/scheduling/domain/errors/schedule-rule-not-found.error";
+import { ScheduleRuleOverlapError } from "@/modules/scheduling/domain/errors/schedule-rule-overlap.error";
 import { DomainError } from "@/shared/domain/errors/domain-error";
 
 export function handleHttpError(error: unknown, c: Context) {
@@ -68,6 +70,32 @@ export function handleHttpError(error: unknown, c: Context) {
 				},
 			},
 			400,
+		);
+	}
+
+	if (error instanceof ScheduleRuleNotFoundError) {
+		return c.json(
+			{
+				success: false,
+				error: {
+					code: "SCHEDULE_RULE_NOT_FOUND",
+					message: error.message,
+				},
+			},
+			404,
+		);
+	}
+
+	if (error instanceof ScheduleRuleOverlapError) {
+		return c.json(
+			{
+				success: false,
+				error: {
+					code: "SCHEDULE_RULE_OVERLAP",
+					message: error.message,
+				},
+			},
+			409,
 		);
 	}
 

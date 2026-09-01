@@ -5,6 +5,7 @@ import { createAuth } from "./modules/identity/backend/auth/auth";
 import { requireAuth } from "./modules/identity/backend/middleware/require-auth";
 import { adminTestRoute } from "./modules/identity/backend/routes/admin-test.route";
 import { patientRoutes } from "./modules/patients/backend/routes/patient.routes";
+import { scheduleRuleRoutes } from "./modules/scheduling/backend/routes/schedule-rule.route";
 import { createDb } from "./shared/database/db";
 import { handleHttpError } from "./shared/domain/errors/handle-http-error";
 import type { Variables } from "./types/variables";
@@ -50,5 +51,6 @@ app.get("/api/v1/protected/me", requireAuth, (c) => {
 app.route("/api/v1/admin", adminTestRoute);
 app.route("/api/v1/exam-types", examTypeRoutes);
 app.route("/api/v1/patients", patientRoutes);
+app.route("/api/v1/schedule-rules", scheduleRuleRoutes);
 
 export default app;
