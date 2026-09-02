@@ -94,7 +94,11 @@ export function ScheduleRulePage() {
 				open={selectedScheduleRule !== null}
 				title="Editar horario"
 				description="Modifica el tramo de atención seleccionado."
-				onOpenChange={setCreateOpen}
+				onOpenChange={(open) => {
+					if (!open) {
+						setSelectedScheduleRule(null);
+					}
+				}}
 			>
 				{selectedScheduleRule ? (
 					<ScheduleRuleForm
@@ -115,10 +119,10 @@ export function ScheduleRulePage() {
 					open={statusScheduleRule !== null}
 					item={statusScheduleRule}
 					isPending={statusMutation.isPending}
-					entityName="horario123"
+					entityName="Horario"
 					getItemLabel={(scheduleRule) => scheduleRule.dayOfWeek}
-					activateDescription={`¿Deseas activar el horario del ${dayLabels[statusScheduleRule.dayOfWeek]} entre ${statusScheduleRule.startTime} y ${statusScheduleRule.endTime}?`}
-					deactivateDescription={`¿Deseas activar el horario del ${dayLabels[statusScheduleRule.dayOfWeek]} entre ${statusScheduleRule.startTime} y ${statusScheduleRule.endTime}?`}
+					activateDescription={`Podrás agendar entre ${statusScheduleRule.startTime} y ${statusScheduleRule.endTime}`}
+					deactivateDescription={`No podrá agendar entre ${statusScheduleRule.startTime} y ${statusScheduleRule.endTime}`}
 					onOpenChange={(open) => {
 						if (!open) {
 							setStatusScheduleRule(null);
