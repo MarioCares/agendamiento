@@ -12,8 +12,8 @@ type SearchPatientsParams = {
 	includeInactive?: boolean;
 };
 
-export async function getActivePatientsCount(): Promise<PatientDto[]> {
-	const response = await api.get<ApiSuccessResponse<PatientDto[]>>(
+export async function getActivePatientsCount(): Promise<number> {
+	const response = await api.get<ApiSuccessResponse<number>>(
 		"/patients/active-count",
 	);
 
