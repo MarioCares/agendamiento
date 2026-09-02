@@ -17,7 +17,7 @@ export function PatientDashboardCard() {
 		>
 			<div className="flex flex-wrap gap-2">
 				<Badge variant="outline">
-					{(activePatientsCount.data ?? []).length} pacientes registrados
+					{activePatientsCount.data} pacientes registrados
 				</Badge>
 			</div>
 		</CardSmall>

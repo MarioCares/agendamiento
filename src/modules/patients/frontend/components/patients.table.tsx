@@ -51,12 +51,14 @@ export function PatientsTable({
 
 						<TableCell>{patient.active ? "Activo" : "Inactivo"}</TableCell>
 
-						<EntityRowActions
-							item={patient}
-							isActive={patient.active}
-							onEdit={onEdit}
-							onRequestStatusChange={onRequestStatusChange}
-						/>
+						<TableCell className="text-right">
+							<EntityRowActions
+								item={patient}
+								isActive={patient.active}
+								onEdit={onEdit}
+								onRequestStatusChange={onRequestStatusChange}
+							/>
+						</TableCell>
 					</TableRow>
 				))}
 			</TableBody>

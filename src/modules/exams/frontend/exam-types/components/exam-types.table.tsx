@@ -42,12 +42,14 @@ export function ExamTypesTable({
 						<TableCell className="font-medium">{examType.name}</TableCell>
 						<TableCell>{examType.durationMinutes} min</TableCell>
 						<TableCell>{examType.active ? "Activo" : "Inactivo"}</TableCell>
-						<EntityRowActions
-							item={examType}
-							isActive={examType.active}
-							onEdit={onEdit}
-							onRequestStatusChange={onRequestStatusChange}
-						/>
+						<TableCell className="text-right">
+							<EntityRowActions
+								item={examType}
+								isActive={examType.active}
+								onEdit={onEdit}
+								onRequestStatusChange={onRequestStatusChange}
+							/>
+						</TableCell>
 					</TableRow>
 				))}
 			</TableBody>
